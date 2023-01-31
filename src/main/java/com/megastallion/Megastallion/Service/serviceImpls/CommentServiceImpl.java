@@ -11,6 +11,9 @@ import com.megastallion.Megastallion.repositories.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
@@ -34,6 +37,20 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.save(comment);
 
         return "Comment posted";
+    }
+
+
+    @Override
+    public List<CommentDto> fetchAllComments(){
+        return commentRepository.findAll().stream().map(this::commentResponseMapper)
+                .collect(Collectors.toList());
+    }
+
+
+    protected CommentDto commentResponseMapper(Comment comment){
+        return CommentDto.builder()
+                .content(comment.getContent())
+                .build();
     }
 
 
