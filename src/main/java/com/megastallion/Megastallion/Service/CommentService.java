@@ -10,4 +10,6 @@ public interface CommentService {
     String createComment(Long postId, CommentDto request);
 
     List<CommentDto> fetchAllComments();
+
+    String deleteComment(Long commentId);
 }

@@ -47,12 +47,28 @@ public class CommentServiceImpl implements CommentService {
     }
 
 
+    @Override
+    public String deleteComment(Long commentId){
+        Comment comment = getComment(commentId);
+        commentRepository.delete(comment);
+        return "Comment deleted";
+    }
+
+
+
+
+
     protected CommentDto commentResponseMapper(Comment comment){
         return CommentDto.builder()
                 .content(comment.getContent())
                 .build();
     }
 
+
+    protected Comment getComment(Long commentId){
+        return commentRepository.findById(commentId).orElseThrow(()
+                -> new ResourceNotFoundException("Not Found","Comment","Id",commentId.toString()));
+    }
 
 
 }
