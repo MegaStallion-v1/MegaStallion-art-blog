@@ -22,10 +22,10 @@ private CategoryRepository categoryRepository;
 
 
     @Override
-    public PostDto createPost(PostDto postRequestDto ) {
-        Category category=categoryRepository.findByName(postRequestDto.getCategory())
+    public PostDto createPost(PostDto postRequestDto, Long categoryId) {
+        Category category=categoryRepository.findById(categoryId)
                 .orElseThrow(()->
-                        new ResourceNotFoundException("Not found","Category","Id",postRequestDto.getCategory()));
+                        new ResourceNotFoundException("Not found","Category","Id",categoryId.toString()));
 
         Post post= Post.builder()
                 .title(postRequestDto.getTitle())

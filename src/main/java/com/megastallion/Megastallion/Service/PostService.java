@@ -7,5 +7,5 @@ import com.megastallion.Megastallion.entities.Post;
 public interface PostService {
 
 
-    PostDto createPost(PostDto postRequestDto);
+    PostDto createPost(PostDto postRequestDto,Long categoryId);
 }
