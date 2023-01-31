@@ -20,4 +20,10 @@ public class CommentController {
         return ResponseEntity.ok(commentService.createComment(postId, request));
     }
 
+
+    @GetMapping("/comments")
+    public ResponseEntity<Object> fetchAllComments(){
+        return ResponseEntity.ok(commentService.fetchAllComments());
+    }
+
 }
