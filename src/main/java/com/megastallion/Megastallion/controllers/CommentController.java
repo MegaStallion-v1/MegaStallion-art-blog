@@ -26,4 +26,9 @@ public class CommentController {
         return ResponseEntity.ok(commentService.fetchAllComments());
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteComment(@RequestParam("id") Long commentId){
+        return ResponseEntity.ok(commentService.deleteComment(commentId));
+    }
+
 }
