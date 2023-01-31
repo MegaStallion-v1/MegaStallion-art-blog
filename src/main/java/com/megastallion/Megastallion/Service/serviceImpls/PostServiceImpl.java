@@ -39,7 +39,7 @@ private CategoryRepository categoryRepository;
        postResponse.setTitle(newPost.getTitle());
        postResponse.setContent(newPost.getContent());
        postResponse.setImageUrl(newPost.getImageUrl());
-        return postResponse;
+       return postResponse;
     }
     @Override
     public String deletePost(Long postId){
@@ -48,6 +48,26 @@ private CategoryRepository categoryRepository;
         postRepository.delete(post);
         return "Post Deleted Successfully";
 
+    }
+
+
+    @Override
+    public PostDto fetchPost(Long postId){
+        Post post = postRepository.findById(postId).orElseThrow(()
+                -> new ResourceNotFoundException("Not Found","Post","Id",postId.toString()));
+
+        return responseMapper(post);
+    }
+
+
+
+    protected PostDto responseMapper(Post post){
+        return PostDto.builder()
+                .title(post.getTitle())
+                .category(post.getCategory().getName())
+                .content(post.getContent())
+                .imageUrl(post.getImageUrl())
+                .build();
     }
 
 

@@ -25,4 +25,9 @@ public class PostController {
     public ResponseEntity<String> deletePost(@PathVariable(name="id") Long postId){
         return  ResponseEntity.ok (postService.deletePost(postId));
     }
+
+    @GetMapping("/get")
+    public ResponseEntity<PostDto> fetchPost(@RequestParam("id") Long postId){
+        return ResponseEntity.ok(postService.fetchPost(postId));
+    }
 }
