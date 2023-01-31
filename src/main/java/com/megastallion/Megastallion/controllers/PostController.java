@@ -17,7 +17,12 @@ public class PostController {
 
 
     @PostMapping("/create-post/{id}")
-    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postRequestDto,@PathVariable("id") Long categoryId){
+    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postRequestDto,@PathVariable(name="id") Long categoryId){
         return new ResponseEntity<>(postService.createPost(postRequestDto,categoryId),HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/delete-post/{id}")
+    public ResponseEntity<String> deletePost(@PathVariable(name="id") Long postId){
+        return  ResponseEntity.ok (postService.deletePost(postId));
     }
 }
