@@ -5,6 +5,7 @@ import com.megastallion.Megastallion.exceptions.ResourceNotFoundException;
 import com.megastallion.Megastallion.payLoad.PostDto;
 import com.megastallion.Megastallion.Service.PostService;
 import com.megastallion.Megastallion.entities.Post;
+import com.megastallion.Megastallion.payLoad.PostUpdateDto;
 import com.megastallion.Megastallion.repositories.CategoryRepository;
 import com.megastallion.Megastallion.repositories.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +40,7 @@ private CategoryRepository categoryRepository;
        postResponse.setTitle(newPost.getTitle());
        postResponse.setContent(newPost.getContent());
        postResponse.setImageUrl(newPost.getImageUrl());
-        return postResponse;
+       return postResponse;
     }
     @Override
     public String deletePost(Long postId){
@@ -50,5 +51,48 @@ private CategoryRepository categoryRepository;
 
     }
 
+
+    @Override
+    public PostDto fetchPost(Long postId){
+        Post post = findPost(postId);
+        return responseMapper(post);
+    }
+
+
+    @Override
+    public PostDto updatePost(Long postId, PostUpdateDto request){
+        Post post = findPost(postId);
+        Category category = findCategory(request.getCategoryId());
+
+        post.setTitle(request.getTitle());
+        post.setCategory(category);
+        post.setContent(request.getContent());
+        post.setImageUrl(request.getImageUrl());
+        postRepository.save(post);
+
+        return responseMapper(post);
+    }
+
+
+
+    protected PostDto responseMapper(Post post){
+        return PostDto.builder()
+                .title(post.getTitle())
+                .category(post.getCategory().getName())
+                .content(post.getContent())
+                .imageUrl(post.getImageUrl())
+                .build();
+    }
+
+
+    protected Post findPost(Long postId){
+        return postRepository.findById(postId).orElseThrow(()
+        -> new ResourceNotFoundException("Not Found","Post","Id",postId.toString()));
+    }
+
+    protected Category findCategory(Long categoryId){
+        return categoryRepository.findById(categoryId).orElseThrow(()
+        -> new ResourceNotFoundException("Not found","Category","Id",categoryId.toString()));
+    }
 
 }
