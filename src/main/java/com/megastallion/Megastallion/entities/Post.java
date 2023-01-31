@@ -12,6 +12,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "post")
 public class Post extends BaseEntity{
 
     private String title;

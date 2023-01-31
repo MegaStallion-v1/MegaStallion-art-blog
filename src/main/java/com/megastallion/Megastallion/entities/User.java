@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.Set;
 
 @Entity
@@ -14,6 +15,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "_user")
 public class User extends BaseEntity{
 
     private String username;
