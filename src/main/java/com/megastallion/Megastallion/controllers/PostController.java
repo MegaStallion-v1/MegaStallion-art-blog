@@ -37,3 +37,4 @@ public class PostController {
         return ResponseEntity.ok(postService.updatePost(postId, request));
     }
 }
+
