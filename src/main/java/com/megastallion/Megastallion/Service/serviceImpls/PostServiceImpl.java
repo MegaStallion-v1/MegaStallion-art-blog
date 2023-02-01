@@ -8,7 +8,6 @@ import com.megastallion.Megastallion.entities.Post;
 import com.megastallion.Megastallion.repositories.CategoryRepository;
 import com.megastallion.Megastallion.repositories.PostRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +21,10 @@ private CategoryRepository categoryRepository;
 
 
     @Override
-    public PostDto createPost(PostDto postRequestDto ) {
-        Category category=categoryRepository.findByName(postRequestDto.getCategory())
+    public PostDto createPost(PostDto postRequestDto, Long categoryId) {
+        Category category=categoryRepository.findById(categoryId)
                 .orElseThrow(()->
-                        new ResourceNotFoundException("Not found","Category","Id",postRequestDto.getCategory()));
+                        new ResourceNotFoundException("Not found","Category","Id",categoryId.toString()));
 
         Post post= Post.builder()
                 .title(postRequestDto.getTitle())
@@ -42,4 +41,14 @@ private CategoryRepository categoryRepository;
        postResponse.setImageUrl(newPost.getImageUrl());
         return postResponse;
     }
+    @Override
+    public String deletePost(Long postId){
+        Post post=postRepository.findById(postId)
+                .orElseThrow(()->new ResourceNotFoundException("Not Found","Post","Id",postId.toString()));
+        postRepository.delete(post);
+        return "Post Deleted Successfully";
+
+    }
+
+
 }
