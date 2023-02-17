@@ -1,9 +1,10 @@
 package com.megastallion.Megastallion.entities;
 
 
+import jakarta.persistence.*;
 import lombok.*;
-
-import javax.persistence.*;
+//
+//import javax.persistence.*;
 import java.util.Set;
 
 @Entity

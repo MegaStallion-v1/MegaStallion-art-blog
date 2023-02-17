@@ -1,11 +1,12 @@
 package com.megastallion.Megastallion.entities;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
+//
+//import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
@@ -15,7 +16,7 @@ import java.util.Date;
 @Setter
 public abstract class BaseEntity {
 
-    @Id
+@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
