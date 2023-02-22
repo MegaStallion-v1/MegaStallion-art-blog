@@ -1,8 +1,12 @@
 package com.megastallion.Megastallion.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.*;
-
-import javax.persistence.*;
+//
+//import javax.persistence.*;
 import java.util.Set;
 
 @Entity

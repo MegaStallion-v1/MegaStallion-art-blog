@@ -1,12 +1,16 @@
 package com.megastallion.Megastallion.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.*;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+//
+//import javax.persistence.CascadeType;
+//import javax.persistence.Entity;
+//import javax.persistence.ManyToOne;
+//import javax.persistence.Table;
 
 @Entity
 @Getter
