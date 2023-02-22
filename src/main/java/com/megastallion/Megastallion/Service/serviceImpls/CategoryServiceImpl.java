@@ -14,6 +14,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto addCategory(CategoryDto categoryDto) {
+        //TODO =========> GET Authenticated when spring security is ready;
         Category category=Category.builder()
                 .name(categoryDto.getName())
                 .build();
